@@ -13,9 +13,24 @@ def get_indices_of_item_weights(weights, length, limit):
     YOUR CODE HERE
     """
 
-    return None
-
-
+    if length == 1:
+        value = None
+    
+    for i, weight in enumerate(weights):
+        hash_table_insert(ht, weight, i)
+        
+    for i, weight in enumerate(weights):
+        package_1 = weight
+        package_2 = limit - package_1
+        retrieve = hash_table_retrieve(ht, package_2)
+        
+        if retrieve is not None:
+            if retrieve > i:
+                value = (retrieve, i)
+            elif retrieve < i:
+                value = (i, retrieve)
+    return value
+    
 def print_answer(answer):
     if answer is not None:
         print(str(answer[0] + " " + answer[1]))
